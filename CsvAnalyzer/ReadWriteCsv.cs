@@ -24,8 +24,7 @@ namespace CsvAnalyzer
                 : base(stream)
             { }
 
-            public CsvFileWriter(string filename)
-                : base(filename)
+            public CsvFileWriter(string filename) : base(filename)
             { }
 
             /// <summary>
@@ -56,11 +55,11 @@ namespace CsvAnalyzer
 
         public class CsvFileReader : StreamReader
         {
-            public CsvFileReader(Stream stream)
-                : base(stream)
+            public CsvFileReader(Stream stream) : base(stream)
             {
             }
-            //Todo check for file acces first Important
+            //The filename needs to to be the qualified filename
+            //With all the checks and balances on file access
             public CsvFileReader(string filename)
                 : base(filename)
             {

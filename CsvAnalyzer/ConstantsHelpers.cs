@@ -17,12 +17,14 @@ namespace CsvAnalyzer
         ///else try and replace known words with float
         public static void convertListData(List<string> stringlist, List<float> floatlist)
         {
-            float f;
-            if (float.TryParse(stringlist[0], out f))
-                ConvertToFloat(stringlist, floatlist);
-            else
-                ReplaceFloat(stringlist, floatlist);//no conversion change all to -1.0
-
+            if (stringlist.Count > 0)
+            {
+                float f;
+                if (float.TryParse(stringlist[0], out f))
+                    ConvertToFloat(stringlist, floatlist);
+                else
+                    ReplaceFloat(stringlist, floatlist);//no conversion change all to -1.0
+            }
         }
         /// <summary>
         /// Convert values to float. If there are special string values
@@ -90,6 +92,33 @@ namespace CsvAnalyzer
             }
             //file is not locked
             return false;
+        }
+        /// <summary>
+        /// Checks if a file name exists
+        /// </summary>
+        /// <param name="theFileName">Full file name</param>
+        /// <returns>bool</returns>
+        public static bool FileExists(string theFileName)
+        {
+            if (File.Exists(theFileName))
+                return true;
+            return false;
+        }
+        /// <summary>
+        /// Do some directory checks
+        /// </summary>
+        /// <param name="theFileName">Full directory name</param>
+        /// <returns>bool</returns>
+        public static bool DirChecks(string theDirPath)
+        {
+            //Check if path sting contains valid root
+            if (!Path.IsPathRooted(theDirPath))
+                return false;
+            //if the directory not there return a message
+            if (!Directory.Exists(theDirPath))
+                return false;
+
+            return true;
         }
 
     }

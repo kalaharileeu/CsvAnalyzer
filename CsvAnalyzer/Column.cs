@@ -20,6 +20,8 @@ namespace CsvAnalyzer
         public int columnnumber;
         //This is a list of values contained in the CSV.
         public List<string> colvalues;
+        [XmlIgnore]
+        private List<float> colfloatvalues;
         /// <summary>
         /// Clears the values in the list
         /// </summary>
@@ -29,17 +31,29 @@ namespace CsvAnalyzer
                 colvalues.Clear();
         }
         /// <summary>
-        /// Return all the values in the list
-        /// Return List of string
+        /// Return all the values in the list. Return List of string
         /// /// </summary>
-        public List<string> Columnvalues
+        [XmlIgnore]
+        public List<string> Columnvalues { get { return colvalues; }}
+        [XmlIgnore]
+        public List<float> GetFloats
         {
             get
             {
-                return colvalues;
+                if (colfloatvalues.Count > 0)
+                    return colfloatvalues;
+                if (colvalues != null)
+                {
+                    ConstantsHelpers.convertListData(colvalues, colfloatvalues);
+                    return colfloatvalues;
+                }
+                return null;
             }
         }
 
-        public Column(){ }
+        public Column()
+        {
+            colfloatvalues = new List<float>();
+        }
     }
 }
