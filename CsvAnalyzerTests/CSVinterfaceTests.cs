@@ -13,8 +13,8 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-            //Act
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");            //Act
             //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
@@ -29,8 +29,8 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFake.xml");
-            //Act
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");            //Act
             //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
@@ -51,8 +51,8 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("");
-            //check that data is not null
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");            //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
                 Debug.WriteLine("The datacolumns capacity is:" + csvinterface.CSVMetaAndColumndata.Count);
@@ -72,8 +72,8 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-            //Act
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");            //Act
             //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
@@ -88,8 +88,8 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.ml");
-            //Act
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1");            //Act
             //check that data is not null
             //file does not exist
             csvinterface.LoadCSVdata(@"C:\121121121121\2016y10m03d_19h28m53s_ReactivePwrMap\2016y10m03d_19h28m53s_SN121638052347_S240_60_LL_ReactivePwrMap.csv");
@@ -102,8 +102,8 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-            //Act
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");            //Act
             //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
@@ -119,8 +119,8 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-            //Act
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");            //Act
             //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
@@ -136,15 +136,16 @@ namespace CsvAnalyzer.Tests
         {
             //Arrange
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("");
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");
             //Act
             //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
                 csvinterface.LoadCSVdata(@"C:\testvsc\121121121121\2016y10m03d_19h28m53s_ReactivePwrMap\2016y10m03d_19h28m53s_SN121638052347_S240_60_LL_ReactivePwrMap.csv");
-            }
-            else
                 return;
+            }
+
             Assert.Fail();//Assert
         }
 
@@ -154,8 +155,8 @@ namespace CsvAnalyzer.Tests
             {
                 //The csvinterface wrap alot of the dll functionality
                 //CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-                CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-                //csvinterface.CSVmetadata("");
+                CSVinterface csvinterface = new CSVinterface();
+                csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");                //csvinterface.CSVmetadata("");
                 //check that data is not null
                 if (csvinterface.CSVMetaAndColumndata != null)
                 {
@@ -176,9 +177,8 @@ namespace CsvAnalyzer.Tests
             //No csv file given, try and load data, nothing happens--good
             {
                 //The csvinterface wrap alot of the dll functionality
-                CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-                //CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-                //csvinterface.CSVmetadata("");
+                CSVinterface csvinterface = new CSVinterface();
+                csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");                //csvinterface.CSVmetadata("");
                 //check that data is not null
                 if (csvinterface.CSVMetaAndColumndata != null)
                 {
@@ -198,13 +198,12 @@ namespace CsvAnalyzer.Tests
         public void CSVinterfaceTestwithDatacount()
         {
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-            //CSVinterface csvinterface = new CSVinterface("");
-            //csvinterface.CSVmetadata("");
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");            //csvinterface.CSVmetadata("");
             //check that data is not null
             if (csvinterface.CSVMetaAndColumndata != null)
             {
-                Console.WriteLine("The datacolumns capacity is:" + csvinterface.CSVMetaAndColumndata.Count);
+                Console.WriteLine("The datacolumns count is:" + csvinterface.CSVMetaAndColumndata.Count);
                 csvinterface.LoadCSVdata(@"C:\testvsc\121121121121\2016y10m03d_19h28m53s_ReactivePwrMap\2016y10m03d_19h28m53s_SN121638052347_S240_60_LL_ReactivePwrMap.csv");
                 //populate the data
                 //csvinterface.LoadData();
@@ -216,9 +215,12 @@ namespace CsvAnalyzer.Tests
             {
                 var metaColumndata = csvinterface.CSVMetaAndColumndata;
                 var column = metaColumndata.Find(x => "Wacpcu" == x.alias).GetFloats;
-                Debug.WriteLine("The column vcount is: {column.count}");
+                Debug.WriteLine($"The column vcount is: {column.Count}");
                 if (column.Count < 1)
+                {
+                    Debug.WriteLine("The column vcount is was smaller that 0");
                     Assert.Fail();
+                }
                 return;
             }
             Assert.Fail();
@@ -228,8 +230,8 @@ namespace CsvAnalyzer.Tests
         public void LoadCSVdataTest()
         {
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-            Debug.WriteLine(csvinterface.CSVMetaAndColumndata.Count);
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");
             if (csvinterface.CSVMetaAndColumndata.Count > 1)
             {
                 return;
@@ -241,8 +243,8 @@ namespace CsvAnalyzer.Tests
         public void LoadCSVdataTest2()
         {
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
-
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");
             Debug.WriteLine(csvinterface.CSVMetaAndColumndata.Count);
 
             foreach (Column c in csvinterface.CSVMetaAndColumndata)

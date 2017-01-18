@@ -8,7 +8,8 @@ namespace TestDrivecsvAnalyzer
         static void Main(string[] args)
         {
             //The csvinterface wrap alot of the dll functionality
-            CSVinterface csvinterface = new CSVinterface("Content/XMLFile1.xml");
+            CSVinterface csvinterface = new CSVinterface();
+            csvinterface.InitializeXmlDataModels("Content/XMLFile1.xml");
             //CSVinterface csvinterface = new CSVinterface("");
             //csvinterface.CSVmetadata("");
             //check that data is not null
@@ -38,6 +39,36 @@ namespace TestDrivecsvAnalyzer
                 Console.WriteLine($"The column vcount is: {column.Count}");
                 if (column.Count < 1)
                     Console.WriteLine("FAIL!");
+            }
+
+            if (csvinterface.GetColumnData("SerialNumber").Count == 0)
+            {
+                //WriteLine("NULL from testrun load");
+                Console.WriteLine("Serial number is there");
+            }
+
+            CSVinterface csvinterface_SKIPS = new CSVinterface();
+            csvinterface_SKIPS.InitializeXmlDataModels("Content/XMLFileSkips.xml");
+            //CSVinterface csvinterface = new CSVinterface("");
+            //csvinterface.CSVmetadata("");
+            //check that data is not null
+            if (csvinterface_SKIPS.CSVMetaAndColumndata != null)
+            {
+                Console.WriteLine("The datacolumns capacity is:" + csvinterface.CSVMetaAndColumndata.Count);
+                csvinterface_SKIPS.LoadCSVdata(@"C:\testvsc\121121121121\2016y10m03d_19h28m53s_ReactivePwrMap\2016y10m03d_19h28m53s_SN121638052347_S240_60_LL_ReactivePwrMap.csv");
+                //populate the data
+                //csvinterface.LoadData();
+            }
+            else
+                Console.WriteLine("The datacolumns metadate is null!");
+
+            if (csvinterface_SKIPS.CSVMetaAndColumndata != null)
+            {
+                foreach (var v in csvinterface_SKIPS.GetColumnData("UO"))
+                {
+                    Console.WriteLine(v);
+                }
+
             }
             Console.ReadLine();
         }

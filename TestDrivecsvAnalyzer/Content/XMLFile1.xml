@@ -196,4 +196,18 @@
     <scale>1</scale>
     <accuracystr>Phaseconfigured</accuracystr>
   </Column>
+  <Column>
+    <columnname>cfg_pcu_type_name</columnname>
+    <alias>HardwareType</alias>
+    <from>config</from>
+    <scale>1</scale>
+    <accuracystr></accuracystr>
+  </Column>
+  <Column>
+    <columnname>cfg_sn</columnname>
+    <alias>SerialNumber</alias>
+    <from>config</from>
+    <scale>1</scale>
+    <accuracystr></accuracystr>
+  </Column>
 </DataColumns>

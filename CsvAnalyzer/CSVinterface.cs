@@ -5,14 +5,18 @@ namespace CsvAnalyzer
 {
     public class CSVinterface
     {
-        public CSVinterface(string xmlfilename)
+        public CSVinterface(){}
+        /// <summary>
+        /// If there is a valid xml data model then feed it here
+        /// </summary>
+        /// <param name="xmlfilename"></param>
+        public void InitializeXmlDataModels(string xmlfilename)
         {
-            csvqualified_filename = "";//Initialize
             //have to do basic file check befor continue
-            if (!ConstantsHelpers.FileExists(xmlfilename))return;
+            if (!ConstantsHelpers.FileExists(xmlfilename)) return;
             //Convert the string to fileInfo to check if it is locked
             FileInfo fi = new FileInfo(xmlfilename);
-            if (ConstantsHelpers.IsFileLocked(fi))return;
+            if (ConstantsHelpers.IsFileLocked(fi)) return;
             XmlManager<DataColumns> columnloader = new XmlManager<DataColumns>();
             //Initialize the datacolumns class with the wanted columns
             //XML file build action none, Copy if newer
@@ -25,19 +29,29 @@ namespace CsvAnalyzer
         /// <param name="csvfilename"></param>
         public void LoadCSVdata(string csvfilename)
         {
-            //have to do basic file check befor continue
-            if (!ConstantsHelpers.FileExists(csvfilename)) return;
-            //have to do basic file check befor continue
-            if (ConstantsHelpers.DirChecks(csvfilename))return;
-            if (csvmetaAnddata == null) return;
-            //checks if the fiel is open or in use
-            FileInfo fi = new FileInfo(csvfilename);
-            if (ConstantsHelpers.IsFileLocked(fi))return;
-            //The filename was check now it is available for use
-            csvqualified_filename = csvfilename;
+            csvqualified_filename = "";//Initialize
+            qualifyCSVfile(csvfilename);
             //Clear old data for new plot
             setupandclearolddata();
             LoadData();
+        }
+        /// <summary>
+        /// Check that the file is ready for use
+        /// </summary>
+        /// <param name="csvfilenanme"></param>
+        private void qualifyCSVfile(string csvfilename)
+        {
+            if (csvmetaAnddata == null)return;
+            //have to do basic file check befor continue
+            if (!ConstantsHelpers.FileExists(csvfilename)) return;
+            //have to do basic file check befor continue
+            if (ConstantsHelpers.DirChecks(csvfilename)) return;
+            if (csvmetaAnddata == null) return;
+            //checks if the fiel is open or in use
+            FileInfo fi = new FileInfo(csvfilename);
+            if (ConstantsHelpers.IsFileLocked(fi)) return;
+            //The filename was check now it is available for use
+            csvqualified_filename = csvfilename;
         }
         /// <summary>
         /// Clear the old data for a replot
@@ -63,8 +77,9 @@ namespace CsvAnalyzer
         /// <returns>bool</returns>
         public int ContainsColumn(string collumnalias)
         {
+            if (csvmetaAnddata == null) return -1;
             int i = csvmetaAnddata.namealiaslist.Count;
-            for (int j = 0; j < i - 1; j++)
+            for (int j = 0; j <= i - 1; j++)
                 if (collumnalias == csvmetaAnddata.namealiaslist[j].alias)
                     return j;
             return -1;
@@ -101,7 +116,7 @@ namespace CsvAnalyzer
         private void LoadData()
         {
             //File was not checked
-            if (csvqualified_filename == "") return;
+            if (csvqualified_filename == "" || csvqualified_filename == null) return;
             // Read sample data from CSV file
             using (ReadWriteCsv.CsvFileReader reader = new ReadWriteCsv.CsvFileReader(csvqualified_filename))
             {
@@ -135,13 +150,8 @@ namespace CsvAnalyzer
             {
                 dictColumnAliasData.Add(c.alias, c);
             }
-            //v key is a string, v.Value is a Column
-            //foreach (var v in dictColumnAliasData)
-            //{
-            //    //populate columns
-            //    columns.Add(new ValuelistI(v.Value.Columnvalues, v.Key, v.Value));
-            //}
         }
+
         //A dictionary of column aliases and data, this dict use for data loading
         Dictionary<string, Column> dictColumnAliasData;
         //Datacolumns is a class holding metadata and data, metadata from xml

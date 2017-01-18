@@ -44,9 +44,7 @@
     <Compile Include="ConstantsHelpers.cs" />
     <Compile Include="CSVinterface.cs" />
     <Compile Include="DataColumns.cs" />
-    <Compile Include="IBaselist.cs" />
     <Compile Include="ReadWriteCsv.cs" />
-    <Compile Include="ValueListI.cs" />
     <Compile Include="XmlManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
