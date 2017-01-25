@@ -27,8 +27,8 @@ namespace CsvAnalyzer
         /// </summary>
         public void clearvalues()
         {
-            if (colvalues.Count > 0)
-                colvalues.Clear();
+            if (colvalues.Count > 0)colvalues.Clear();
+            if (colfloatvalues.Count > 0) colfloatvalues.Clear();
         }
         /// <summary>
         /// Return all the values in the list. Return List of string
